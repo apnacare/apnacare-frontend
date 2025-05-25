@@ -1,0 +1,32 @@
+const productCategory = [
+  { id: 1, label: "AC repair & services", value: "ac-repair&services" },
+  { id: 2, label: "Air cooler repair & services", value: "air-cooler" },
+  { id: 3, label: "Refrigerator repair & services", value: "refrigerator" },
+  { id: 4, label: "Computer Repair", value: "computer-repair" },
+  { id: 5, label: "Water Purifier", value: "water-purifier" },
+  { id: 6, label: "Washing Machine", value: "washing-machine" },
+  { id: 7, label: "Hair Studio for Women", value: "hair-studio-for-women" },
+  { id: 8, label: "Women's Spa", value: "women-spa" },
+  { id: 9, label: "Makeup & Styling Studio", value: "makeup&styling-studio" },
+  { id: 10, label: "Salon for Men", value: "salon-for-men" },
+  { id: 11, label: "Massage for Men", value: "massage-for-men" },
+  { id: 12, label: "Bathroom Cleaning", value: "bathroom-cleaning" },
+  { id: 13, label: "Kitchen Cleaning", value: "kitchen-cleaning" },
+  { id: 14, label: "Home Cleaning", value: "home-cleaning" },
+  { id: 15, label: "Sofa & Carpet Cleaning", value: "sofa&carpet-cleaning" },
+  { id: 16, label: "Cockroach, Ant & General Pest Control", value: "general-pest-control" },
+  { id: 17, label: "Electrician", value: "electrician" },
+  { id: 18, label: "Plumber", value: "plumber" },
+  { id: 19, label: "Carpenter", value: "carpenter" },
+  { id: 20, label: "Painting", value: "painting" },
+  { id: 21, label: "Insta Help", value: "insta-help" },
+  { id: 22, label: "Car Cleaning & Detailing", value: "car-cleaning&detailing" },
+  { id: 23, label: "Gardening Services", value: "gardening-services" },
+  { id: 24, label: "TV Repair & Services", value: "tv-repair&services" },
+  { id: 25, label: "Movers & Packers", value: "movers&packers" },
+  { id: 26, label: "Chimney", value: "chimney" },
+  // todo: delete
+  { id: 27, label: "Chimney delete before production", value: "chimney-delete" },
+];
+
+export default productCategory;
