@@ -25,8 +25,6 @@ const productCategory = [
   { id: 24, label: "TV Repair & Services", value: "tv-repair&services" },
   { id: 25, label: "Movers & Packers", value: "movers&packers" },
   { id: 26, label: "Chimney", value: "chimney" },
-  // todo: delete
-  { id: 27, label: "Chimney delete before production", value: "chimney-delete" },
 ];
 
 export default productCategory;
