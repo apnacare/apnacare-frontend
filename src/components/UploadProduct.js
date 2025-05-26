@@ -80,26 +80,27 @@ const UploadProduct = ({ onClose, fetchData }) => {
       toast.error(responseData?.message);
     }
   };
-
   return (
-    <div className="fixed w-full h-full bg-gray-800 bg-opacity-50 top-0 left-0 right-0 bottom-0 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg w-full max-w-2xl h-full max-h-[90%] overflow-auto shadow-lg">
-        <div className="flex justify-between items-center pb-4">
-          <h2 className="text-2xl font-semibold text-gray-800">
-            Upload Product
+    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col">
+        {/* Header */}
+        <div className="flex justify-between items-center px-5 py-4 border-b flex-shrink-0">
+          <h2 className="text-xl font-semibold text-gray-800">
+            Create New Service
           </h2>
-          <div
-            className="text-2xl text-gray-600 hover:text-red-600 cursor-pointer"
+          <button
             onClick={onClose}
+            className="text-2xl text-gray-700 hover:text-red-600 transition"
           >
             <CgClose />
-          </div>
+          </button>
         </div>
 
-        <form className="space-y-4" onSubmit={handleSubmit}>
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="px-6 py-4 overflow-y-auto flex-grow space-y-4">
           <div>
             <label htmlFor="productName" className="block text-gray-700">
-              Product Name:
+              Service Name:
             </label>
             <input
               type="text"
@@ -115,12 +116,12 @@ const UploadProduct = ({ onClose, fetchData }) => {
 
           <div>
             <label htmlFor="brandName" className="block text-gray-700">
-              Brand Name:
+              Estimated time:
             </label>
             <input
               type="text"
               id="brandName"
-              placeholder="Enter brand name"
+              placeholder="Enter estimated time"
               value={data.brandName}
               name="brandName"
               onChange={handleOnChange}
@@ -151,13 +152,13 @@ const UploadProduct = ({ onClose, fetchData }) => {
 
           <div>
             <label htmlFor="productImage" className="block text-gray-700">
-              Product Image:
+              Service Image:
             </label>
             <label htmlFor="uploadImageInput">
               <div className="w-full p-4 bg-gray-100 border border-dashed rounded-lg flex justify-center items-center cursor-pointer">
                 <div className="text-gray-500 text-center">
                   <FaCloudUploadAlt className="text-4xl mb-2" />
-                  <p className="text-sm">Upload Product Image</p>
+                  <p className="text-sm">Upload Service Image</p>
                   <input
                     type="file"
                     id="uploadImageInput"
@@ -192,7 +193,7 @@ const UploadProduct = ({ onClose, fetchData }) => {
                 ))
               ) : (
                 <p className="text-red-600 text-xs">
-                  *Please upload product image
+                  *Please upload service image
                 </p>
               )}
             </div>
@@ -237,29 +238,27 @@ const UploadProduct = ({ onClose, fetchData }) => {
             <textarea
               id="description"
               className="w-full p-3 bg-gray-100 border rounded-lg resize-none focus:ring-2 focus:ring-indigo-500"
-              placeholder="Enter product description"
+              placeholder="Enter service description"
               rows={3}
               onChange={handleOnChange}
               name="description"
               value={data.description}
             ></textarea>
-          </div>
-
-          <div>
-            <button className="w-full py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-all">
-              Upload Product
+          </div>          <div className="pb-4">
+            <button type="submit" className="w-full bg-emerald-600 py-3 hover:bg-emerald-700 text-white font-medium rounded-lg transition">
+              Submit
             </button>
           </div>
         </form>
+        
+        {/* Fullscreen Image Modal */}
+        {openFullScreenImage && (
+          <DisplayImage
+            onClose={() => setOpenFullScreenImage(false)}
+            imgUrl={fullScreenImage}
+          />
+        )}
       </div>
-
-      {/* Fullscreen Image Modal */}
-      {openFullScreenImage && (
-        <DisplayImage
-          onClose={() => setOpenFullScreenImage(false)}
-          imgUrl={fullScreenImage}
-        />
-      )}
     </div>
   );
 };

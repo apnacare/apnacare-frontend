@@ -58,12 +58,11 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
       toast.error(responseData?.message);
     }
   };
-
   return (
     <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white rounded-xl shadow-lg w-full max-w-3xl max-h-[85vh] h-full overflow-hidden relative">
+      <div className="bg-white rounded-xl shadow-lg w-full max-w-3xl max-h-[85vh] overflow-hidden flex flex-col">
         {/* Header */}
-        <div className="flex justify-between items-center px-5 py-4 border-b bg-softbeige">
+        <div className="flex justify-between items-center px-5 py-4 border-b bg-softbeige flex-shrink-0">
           <h2 className="text-xl font-semibold text-leafgreen">Edit Product</h2>
           <button
             onClick={onClose}
@@ -76,11 +75,11 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
         {/* Form */}
         <form
           onSubmit={handleSubmit}
-          className="px-6 py-4 overflow-y-auto h-full space-y-4"
+          className="px-6 py-4 overflow-y-auto flex-grow space-y-4"
         >
           <div>
             <label htmlFor="productName" className="font-medium text-leafgreen">
-              Product Name
+              Service Name
             </label>
             <input
               type="text"
@@ -90,13 +89,13 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
               onChange={handleOnChange}
               required
               className="mt-1 w-full p-2 border bg-softbeige rounded focus:outline-none focus:ring-2 focus:ring-leafgreen"
-              placeholder="Enter product name"
+              placeholder="Enter Service name"
             />
           </div>
 
           <div>
             <label htmlFor="brandName" className="font-medium text-leafgreen">
-              Brand Name
+              Estimated time
             </label>
             <input
               type="text"
@@ -106,7 +105,7 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
               onChange={handleOnChange}
               required
               className="mt-1 w-full p-2 border bg-softbeige rounded focus:outline-none focus:ring-2 focus:ring-leafgreen"
-              placeholder="Enter brand name"
+              placeholder="Enter estimated time"
             />
           </div>
 
@@ -132,11 +131,11 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
           </div>
 
           <div>
-            <label className="font-medium text-leafgreen">Product Images</label>
+            <label className="font-medium text-leafgreen">Service Images</label>
             <label htmlFor="uploadImageInput" className="block cursor-pointer">
               <div className="flex flex-col items-center justify-center border-2 border-dashed border-leafgreen bg-softbeige rounded h-32 hover:bg-lightgreen transition">
                 <FaCloudUploadAlt className="text-4xl text-leafgreen" />
-                <p className="text-sm text-leafgreen">Upload Product Image</p>
+                <p className="text-sm text-leafgreen">Upload Service Image</p>
                 <input
                   type="file"
                   id="uploadImageInput"
@@ -169,7 +168,7 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
               ))}
               {!data.productImage.length && (
                 <p className="text-xs text-red-600">
-                  *Please upload at least one product image
+                  *Please upload at least one image
                 </p>
               )}
             </div>
@@ -223,16 +222,15 @@ const AdminEditProduct = ({ onClose, productData, fetchdata }) => {
               onChange={handleOnChange}
               rows={4}
               className="w-full p-2 border bg-softbeige rounded resize-none focus:outline-none focus:ring-2 focus:ring-leafgreen"
-              placeholder="Enter product description"
+              placeholder="Enter service description"
             ></textarea>
-          </div>
-
-          <div className="text-right">
+          </div>          
+          <div className="pb-4">
             <button
               type="submit"
-              className="bg-leafgreen hover:bg-olivegreen text-white font-medium px-5 py-2 rounded transition"
+              className="w-full bg-blue-600 py-3 hover:bg-blue-700 text-white font-medium px-5 rounded-lg transition"
             >
-              Update Product
+              Update Service
             </button>
           </div>
         </form>
