@@ -77,7 +77,7 @@ const Header = () => {
           </div>
 
           {/* Eco Toggle */}
-          <div className="flex items-center gap-2">
+          {/* <div className="flex items-center gap-2">
             <span className="text-sm text-gray-700">Eco</span>
             <button
               onClick={() => setEco((prev) => !prev)}
@@ -91,7 +91,7 @@ const Header = () => {
                 }`}
               />
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* User Controls (Desktop) */}

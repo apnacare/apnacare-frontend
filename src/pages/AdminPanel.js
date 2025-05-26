@@ -44,7 +44,7 @@ const AdminPanel = () => {
             to={"all-products"}
             className="block px-4 py-2 rounded-lg text-lg text-gray-800 hover:bg-gray-100 hover:text-blue-600 transition-all"
           >
-            All Products
+            All Services
           </Link>
           <Link
             to={"admin-order"}
