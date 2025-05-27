@@ -64,6 +64,7 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                   <div className="bg-[#A5D6A7] h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
                     <img
                       src={product.productImage[0]}
+                      alt={`${product.productName}`}
                       className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply"
                     />
                   </div>
@@ -83,10 +84,10 @@ const CategroyWiseProductDisplay = ({ category, heading }) => {
                       </p>
                     </div>
                     <button
-                      className="text-sm bg-[#388E3C] hover:bg-[#2C6B2F] text-white px-3 py-0.5 rounded-full"
+                      className="text-sm bg-[#388E3C] hover:bg-[#2C6B2F] text-white px-3 py-1 rounded-full"
                       onClick={(e) => handleAddToCart(e, product?._id)}
                     >
-                      Add to Cart
+                      Add
                     </button>
                   </div>
                 </Link>
