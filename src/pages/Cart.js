@@ -12,7 +12,71 @@ const Cart = () => {
   const context = useContext(Context);
   const loadingCart = new Array(4).fill(null);
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);  const [formData, setFormData] = useState({
+    fullname: "",
+    mobile: "",
+    address1: "",
+    city: "",
+    state: "",
+    pincode: "",
+  });
+  const [errors, setErrors] = useState({});
+  const [formSubmitted, setFormSubmitted] = useState(false);
+
+  const handleFormChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+
+    // Clear error when user types in a field
+    if (errors[name]) {
+      setErrors({
+        ...errors,
+        [name]: "",
+      });
+    }
+  };
+
+  const validateForm = () => {
+    const newErrors = {};
+    const requiredFields = [
+      "fullname",
+      "mobile",
+      "address1",
+      "city",
+      "state",
+      "pincode",
+    ];
+
+    requiredFields.forEach((field) => {      if (!formData[field].trim()) {
+        newErrors[field] = `${
+          field === "mobile"
+            ? "Mobile number"
+            : field === "address1"
+            ? "Address"
+            : field === "pincode"
+            ? "Pincode"
+            : field.charAt(0).toUpperCase() + field.slice(1)
+        } is required`;
+      }
+    });
+
+    // Validate mobile number (10 digits)
+    if (formData.mobile && !/^\d{10}$/.test(formData.mobile)) {
+      newErrors.mobile = "Mobile number must be 10 digits";
+    }
+
+    // Validate pincode (6 digits)
+    if (formData.pincode && !/^\d{6}$/.test(formData.pincode)) {
+      newErrors.pincode = "Pincode must be 6 digits";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const loadRazorpayScript = () => {
     return new Promise((resolve) => {
       const script = document.createElement("script");
@@ -40,9 +104,21 @@ const Cart = () => {
       setData([]);
       context.fetchUserAddToCart();
     }
-  };
-
-  const handlePaymentClick = async () => {
+  };  const handlePaymentClick = async () => {
+    setFormSubmitted(true);
+    
+    // Validate form before proceeding with payment
+    if (!validateForm()) {
+      toast.error("Please fill in all required shipping details");
+      
+      // Scroll to the form for better visibility of errors
+      document.querySelector('.shipping-form-container')?.scrollIntoView({ 
+        behavior: 'smooth', 
+        block: 'center' 
+      });
+      return;
+    }
+    
     const res = await loadRazorpayScript();
 
     if (!res) {
@@ -70,7 +146,7 @@ const Cart = () => {
         key: "rzp_test_nlAJXraG5BZKmo",
         amount: responseData.amount,
         currency: "INR",
-        name: "Flima",
+        name: "Apnacare",
         description: "Order Payment",
         order_id: responseData.id,
         handler: function (response) {
@@ -125,11 +201,11 @@ const Cart = () => {
   const handleLoading = async () => {
     await fetchData();
   };
-
   useEffect(() => {
     setLoading(true);
     handleLoading();
     setLoading(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const increaseQty = async (id, qty) => {
@@ -180,11 +256,18 @@ const Cart = () => {
   };
 
   const totalQty = data.reduce((prev, curr) => prev + curr.quantity, 0);
-
   const totalPrice = data.reduce(
     (prev, curr) => prev + curr.quantity * curr?.productId?.sellingPrice,
     0
   );
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setFormSubmitted(true);
+    if (validateForm()) {
+      toast.success("Address saved successfully");
+    }
+  };
 
   return (
     <div className="container mx-auto">
@@ -213,7 +296,7 @@ const Cart = () => {
                     <img
                       src={product.productId.productImage[0]}
                       className="w-full h-full object-scale-down mix-blend-multiply"
-                      alt="Product"
+                      alt="Service"
                     />
                   </div>
                   <div className="px-4 py-2 relative">
@@ -290,62 +373,69 @@ const Cart = () => {
           </div>
         )}
 
-        {/* Address Form */}
-        <div className="mt-5 lg:mt-0 w-full max-w-sm">
-          <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">
-            <h2 className="text-xl font-semibold text-gray-800 mb-4">
+        {/* Address Form */}        <div className="mt-5 lg:mt-0 w-full max-w-sm shipping-form-container">
+          <div className="max-w-xl mx-auto p-6 bg-white rounded-xl shadow-md space-y-4">            <h2 className="text-xl font-semibold text-gray-800 mb-4">
               Shipping Address
             </h2>
-            {[
-              {
-                id: "fullname",
-                label: "Full Name",
-                placeholder: "Rahul Sharma",
-              },
-              {
-                id: "mobile",
-                label: "Mobile Number",
-                placeholder: "9876543210",
-              },
-              {
-                id: "address1",
-                label: "Address Line 1",
-                placeholder: "Flat, House no., Building, Company, Apartment",
-              },
-              {
-                id: "address2",
-                label: "Address Line 2",
-                placeholder: "Area, Colony, Street, Sector, Village",
-              },
-              { id: "city", label: "City", placeholder: "Mumbai" },
-              { id: "state", label: "State", placeholder: "Maharashtra" },
-              { id: "pincode", label: "Pincode", placeholder: "400001" },
-            ].map(({ id, label, placeholder }) => (
-              <div key={id}>
-                <label
-                  htmlFor={id}
-                  className="block text-sm font-medium text-gray-700 mb-1"
-                >
-                  {label}
-                </label>
-                <input
-                  type="text"
-                  id={id}
-                  name={id}
-                  placeholder={placeholder}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none"
-                />
+            {formSubmitted && Object.keys(errors).length > 0 && (
+              <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded text-red-600 text-sm">
+                Please fill in all required fields correctly to proceed with payment.
               </div>
-            ))}
-
-            <div className="pt-4">
-              <button
-                type="submit"
-                className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors duration-300"
-              >
-                Save Address
-              </button>
-            </div>
+            )}
+            <form onSubmit={handleSubmit}>              {[
+                {
+                  id: "fullname",
+                  label: "Full Name",
+                  placeholder: "Rahul Sharma",
+                },
+                {
+                  id: "mobile",
+                  label: "Mobile Number",
+                  placeholder: "9876543210",
+                },
+                {
+                  id: "address1",
+                  label: "Address",
+                  placeholder: "Flat, House no., Building, Area, Colony, Street",
+                },
+                { id: "city", label: "City", placeholder: "Mumbai" },
+                { id: "state", label: "State", placeholder: "Maharashtra" },
+                { id: "pincode", label: "Pincode", placeholder: "400001" },
+              ].map(({ id, label, placeholder }) => (
+                <div key={id} className="mb-3">                  <label
+                    htmlFor={id}
+                    className="block text-sm font-medium text-gray-700 mb-1"
+                  >
+                    {label} <span className="text-red-500">*</span>
+                  </label>                  <input
+                    type="text"
+                    id={id}
+                    name={id}
+                    placeholder={placeholder}
+                    value={formData[id]}
+                    onChange={handleFormChange}
+                    className={`w-full px-4 py-2 border ${
+                      errors[id] && (formSubmitted || formData[id].trim() !== '') 
+                        ? 'border-red-500' 
+                        : 'border-gray-300'
+                    } rounded-md focus:ring-2 focus:ring-green-500 focus:outline-none`}
+                  />
+                  {errors[id] && (formSubmitted || formData[id].trim() !== '') && (
+                    <p className="text-red-500 text-xs mt-1">{errors[id]}</p>
+                  )}
+                </div>
+              ))}              <div className="pt-4">
+                <button
+                  type="submit"
+                  className="w-full bg-green-600 text-white py-2 rounded-md hover:bg-green-700 transition-colors duration-300"
+                >
+                  Save Address & Continue
+                </button>
+                <p className="text-xs text-gray-500 mt-2 text-center">
+                  Address must be filled before proceeding with payment
+                </p>
+              </div>
+            </form>
           </div>
         </div>
       </div>

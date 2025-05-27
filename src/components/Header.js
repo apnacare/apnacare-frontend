@@ -50,7 +50,7 @@ const Header = () => {
   };
 
   return (
-    <header className="fixed w-full z-50 bg-white/80 backdrop-blur border-b shadow-sm">
+    <header className="px-20 fixed w-full z-50 bg-white/80 backdrop-blur border-b shadow-sm">
       <div className="h-16 flex items-center justify-between px-4 lg:px-8 container mx-auto">
         {/* Logo */}
         <Link to="/" className="flex items-center">
@@ -63,7 +63,7 @@ const Header = () => {
 
         {/* Search + Eco (Desktop) */}
         <div className="hidden lg:flex items-center gap-3 w-full max-w-md">
-          <div className="flex items-center w-full border rounded-full px-3 shadow-sm focus-within:ring-2 ring-emerald-500 transition">
+          <div className="bg-white flex items-center w-full border rounded-full px-3 shadow-sm focus-within:ring-2 ring-emerald-500 transition">
             <input
               type="text"
               placeholder="Search for services..."
