@@ -11,31 +11,31 @@ const Home = () => {
       <BannerProduct />
 
       <HorizontalCardProduct
-        category={"eco-friendly-stationery"}
-        heading={"Eco-Friendly Stationery"}
+        category={"car-cleaning&detailing"}
+        heading={"Car cleaning and services"}
       />
       <HorizontalCardProduct
-        category={"recycled-furniture"}
-        heading={"Recycled Furniture"}
+        category={"ac-repair&services"}
+        heading={"AC repair"}
       />
 
-      <VerticalCardProduct category={"mobiles"} heading={"Mobiles"} />
+      <VerticalCardProduct category={"air-cooler"} heading={"Air cooler services"} />
       <VerticalCardProduct
-        category={"reusable-water-bottles-cups"}
-        heading={"Reusable Water Bottles and Cups"}
+        category={"computer-repair"}
+        heading={"Computer repair"}
       />
-      <VerticalCardProduct category={"televisions"} heading={"Televisions"} />
+      <VerticalCardProduct category={"washing-machine"} heading={"Washing machine"} />
       <VerticalCardProduct
-        category={"camera"}
-        heading={"Camera & Photography"}
+        category={"women-spa"}
+        heading={"Women spa"}
       />
-      <VerticalCardProduct category={"earphones"} heading={"Wired Earphones"} />
+      <VerticalCardProduct category={"makeup&styling-studio"} heading={"Makeup & styling"} />
       <VerticalCardProduct
-        category={"speakers"}
-        heading={"Bluetooth Speakers"}
+        category={"salon-for-men"}
+        heading={"Salon for men"}
       />
       <VerticalCardProduct category={"refrigerator"} heading={"Refrigerator"} />
-      <VerticalCardProduct category={"trimmers"} heading={"Trimmers"} />
+      <VerticalCardProduct category={"electrician"} heading={"Electrician"} />
     </div>
   );
 };

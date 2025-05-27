@@ -50,13 +50,13 @@ const VerticalCardProduct = ({ category, heading }) => {
         ref={scrollElement}
       >
         <button
-          className="bg-white shadow-lg rounded-full p-3 absolute left-0 text-xl hidden md:block text-emerald-700 hover:bg-emerald-100 transition-all"
+          className="z-20 bg-white shadow-lg rounded-full p-3 absolute left-0 text-xl hidden md:block text-emerald-700 hover:bg-emerald-100 transition-all"
           onClick={scrollLeft}
         >
           <FaAngleLeft />
         </button>
         <button
-          className="bg-white shadow-lg rounded-full p-3 absolute right-0 text-xl hidden md:block text-emerald-700 hover:bg-emerald-100 transition-all"
+          className="z-20 bg-white shadow-lg rounded-full p-3 absolute right-0 text-xl hidden md:block text-emerald-700 hover:bg-emerald-100 transition-all"
           onClick={scrollRight}
         >
           <FaAngleRight />
@@ -89,6 +89,7 @@ const VerticalCardProduct = ({ category, heading }) => {
                 <div className="bg-[#ecfdf5] h-48 p-4 min-w-[280px] md:min-w-[145px] flex justify-center items-center">
                   <img
                     src={product.productImage[0]}
+                    alt={product?.productName || "Service image"}
                     className="object-scale-down h-full hover:scale-110 transition-all mix-blend-multiply"
                   />
                 </div>

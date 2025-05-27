@@ -38,7 +38,7 @@ const ProductDetails = () => {
 
   const navigate = useNavigate();
 
-  const fetchProductDetails = async () => {
+  const fetchProductDetails = useCallback(async () => {
     setLoading(true);
     const response = await fetch(SummaryApi.productDetails.url, {
       method: SummaryApi.productDetails.method,
@@ -54,13 +54,14 @@ const ProductDetails = () => {
 
     setData(dataReponse?.data);
     setActiveImage(dataReponse?.data?.productImage[0]);
-  };
+  }, [params?.id]);
 
-  console.log("data", data);
 
   useEffect(() => {
     fetchProductDetails();
-  }, [params]);
+    console.log("product details name",);
+    document.title = data.productName.length === 0 ? "Service details" : data.productName;
+  }, [params, fetchProductDetails, data.productName]);
 
   const handleMouseEnterProduct = (imageURL) => {
     setActiveImage(imageURL);
@@ -119,9 +120,8 @@ const ProductDetails = () => {
                   style={{
                     background: `url(${activeImage})`,
                     backgroundRepeat: "no-repeat",
-                    backgroundPosition: `${zoomImageCoordinate.x * 100}% ${
-                      zoomImageCoordinate.y * 100
-                    }% `,
+                    backgroundPosition: `${zoomImageCoordinate.x * 100}% ${zoomImageCoordinate.y * 100
+                      }% `,
                   }}
                 ></div>
               </div>

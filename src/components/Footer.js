@@ -1,4 +1,7 @@
 import React from "react";
+import logo from "../assest/logo/apnacare_logo_white.svg";
+import { Link } from "react-router-dom";
+
 import {
   FaFacebookF,
   FaTwitter,
@@ -9,9 +12,9 @@ import {
 const Footer = () => {
   const year = new Date().getFullYear();
 
-  const shopLinks = ["Laptops", "Mobiles", "Accessories", "Offers"];
-  const helpLinks = ["Shipping", "Returns", "FAQs", "Contact"];
-  const companyLinks = ["About Us", "Careers", "Privacy Policy", "Terms"];
+  const shopLinks = ["Home cleaning", "Refrigerators", "Men and Women hair care", "Electronics services"];
+  const helpLinks = ["FAQs", "Contact"];
+  const companyLinks = ["About Us", "Privacy Policy", "Terms"];
 
   const socialIcons = [
     { icon: <FaFacebookF />, link: "#" },
@@ -25,9 +28,16 @@ const Footer = () => {
       <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-5 gap-8">
         {/* Brand */}
         <div className="md:col-span-2">
-          <h2 className="text-2xl font-bold mb-2">Filma</h2>
+          {/* Logo */}
+          <Link to="/" className="flex items-center">
+            <img
+              src={logo}
+              alt="logo"
+              className="h-[25px] object-contain"
+            />
+          </Link>
           <p className="text-gray-300 mb-4">
-            Premium electronics at your fingertips. Shop smart, shop Filma.
+            Premium services at your fingertips. We care for you.
           </p>
           <div className="flex space-x-4">
             {socialIcons.map((item, idx) => (
@@ -44,7 +54,7 @@ const Footer = () => {
 
         {/* Shop */}
         <div>
-          <h4 className="text-lg font-semibold mb-3">Shop</h4>
+          <h4 className="text-lg font-semibold mb-3">Services</h4>
           <ul className="space-y-2 text-gray-300">
             {shopLinks.map((link, idx) => (
               <li key={idx} className="hover:text-white cursor-pointer">
@@ -81,7 +91,7 @@ const Footer = () => {
 
       {/* Bottom line */}
       <div className="mt-10 border-t border-gray-700 pt-6 text-center text-sm text-gray-400">
-        © {year} Filma. All rights reserved.
+        © {year} Apnacare. All rights reserved.
       </div>
     </footer>
   );

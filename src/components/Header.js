@@ -1,7 +1,7 @@
 // Paste this entire code into your Header.jsx file
 
 import React, { useContext, useState } from "react";
-import logo from "../assest/logo/flima.png";
+import logo from "../assest/logo/apnacare_logo_black.svg";
 import { GrSearch } from "react-icons/gr";
 import { FaRegCircleUser } from "react-icons/fa6";
 import { FaShoppingCart } from "react-icons/fa";
@@ -57,7 +57,7 @@ const Header = () => {
           <img
             src={logo}
             alt="logo"
-            className="w-[90px] h-[60px] object-contain"
+            className="h-[35px] object-contain"
           />
         </Link>
 
@@ -66,7 +66,7 @@ const Header = () => {
           <div className="flex items-center w-full border rounded-full px-3 shadow-sm focus-within:ring-2 ring-emerald-500 transition">
             <input
               type="text"
-              placeholder="Search eco products..."
+              placeholder="Search for services..."
               className="w-full outline-none py-1.5 text-sm text-gray-700"
               onChange={handleSearch}
               value={search}
@@ -174,7 +174,7 @@ const Header = () => {
           <button onClick={() => navigate("/search")}>
             <GrSearch className="text-xl" />
           </button>
-          <button
+          {/* <button
             onClick={() => setEco((prev) => !prev)}
             className={`w-10 h-5 flex items-center rounded-full p-0.5 transition ${
               eco ? "bg-emerald-500" : "bg-gray-300"
@@ -185,7 +185,7 @@ const Header = () => {
                 eco ? "translate-x-5" : "translate-x-0"
               }`}
             />
-          </button>
+          </button> */}
           <button
             onClick={() => setDrawerOpen((prev) => !prev)}
             className="text-2xl"
