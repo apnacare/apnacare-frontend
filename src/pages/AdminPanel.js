@@ -20,10 +20,9 @@ const AdminPanel = () => {
   const isActive = (path) => {
     return location.pathname.includes(path);
   };
-
   return (
     <div className="min-h-screen flex bg-gray-50">
-      <aside className="bg-white w-[280px] min-h-screen shadow-xl p-6 fixed left-0 top-0">
+      <aside className="bg-white w-[280px] h-screen shadow-xl p-6 fixed left-0 top-0 overflow-y-auto">
         <div className="flex items-center gap-2 mb-8">
           <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
             <span className="text-white font-bold text-xl">F</span>
@@ -98,10 +97,13 @@ const AdminPanel = () => {
             <p className="text-sm font-medium text-blue-800">Admin Dashboard</p>
             <p className="text-xs text-blue-600 mt-1">Manage your ecommerce services</p>
           </div>
-        </div> */}
-      </aside>
+        </div> */}      </aside>
 
-      <main className="ml-[280px] w-full p-8 overflow-auto">
+      <div className="w-[280px] flex-shrink-0">
+        {/* This is a placeholder div that takes up the same width as the fixed sidebar */}
+      </div>
+      
+      <main className="flex-grow p-8 overflow-auto min-h-screen pb-16">
         <Outlet />
       </main>
     </div>
