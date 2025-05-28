@@ -10,10 +10,18 @@ import SummaryApi from "./common";
 import Context from "./context";
 import { useDispatch } from "react-redux";
 import { setUserDetails } from "./store/userSlice";
+import { useLocation } from "react-router-dom";
 
 function App() {
   const dispatch = useDispatch();
   const [cartProductCount, setCartProductCount] = useState(0);
+  const location = useLocation();
+  
+  // Function to determine if footer should be hidden
+  const shouldHideFooter = () => {
+    return location.pathname.includes('/admin-panel') || 
+           location.pathname.includes('/user-panel');
+  };
 
   const fetchUserDetails = async () => {
     const dataResponse = await fetch(SummaryApi.current_user.url, {
@@ -54,13 +62,11 @@ function App() {
           fetchUserAddToCart,
         }}
       >
-        <ToastContainer position="top-center" />
-
-        <Header />
-        <main className="min-h-[calc(100vh-120px)] pt-16 px-20">
+        <ToastContainer position="top-center" />        <Header />
+        <main className={`${!shouldHideFooter() ? 'min-h-[calc(100vh-120px)]' : 'min-h-screen'} pt-16 px-20`}>
           <Outlet />
         </main>
-        <Footer />
+        {!shouldHideFooter() && <Footer />}
       </Context.Provider>
     </>
   );

@@ -69,11 +69,14 @@ const router = createBrowserRouter([
             element: <AdminOrderDetails />,
           },
         ],
-      },
-      {
+      },      {
         path: "user-panel",
         element: <UserPanel />,
         children: [
+          {
+            index: true, // Default route
+            element: <OrderDetails />,
+          },
           {
             path: "all-order",
             element: <OrderDetails />,

@@ -9,15 +9,21 @@ const UserPanel = () => {
   const user = useSelector((state) => state?.user?.user);
   const navigate = useNavigate();
   const location = useLocation();
-
   useEffect(() => {
     if (user?.role !== ROLE.GENERAL) {
       navigate("/");
+    } else if (location.pathname === "/user-panel") {
+      // Redirect to all-order by default when accessing just /user-panel
+      navigate("/user-panel/all-order");
     }
-  }, [user, navigate]);
+  }, [user, navigate, location.pathname]);
 
   // Check if the given path is active
   const isActive = (path) => {
+    // If we're at the root user panel path, consider all-order as active
+    if (location.pathname === "/user-panel" && path === "all-order") {
+      return true;
+    }
     return location.pathname.includes(path);
   };
   return (
