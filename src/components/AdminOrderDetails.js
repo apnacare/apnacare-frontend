@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import SummaryApi from "../common";
+const backendDomain = process.env.REACT_APP_BACKEND_URL;
 
 const AdminOrderDetails = () => {
   const [orders, setOrders] = useState([]);
@@ -43,7 +44,7 @@ const AdminOrderDetails = () => {
     setUpdating(orderId);
     try {
       const res = await fetch(
-        `http://api.flimastore.live/api/update-order-status/${orderId}`,
+        `${{backendDomain}}/api/update-order-status/${orderId}`,
         {
           method: "PUT",
           credentials: "include",
