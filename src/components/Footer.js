@@ -14,7 +14,11 @@ const Footer = () => {
 
   const shopLinks = ["Home cleaning", "Refrigerators", "Men and Women hair care", "Electronics services"];
   const helpLinks = ["FAQs", "Contact"];
-  const companyLinks = ["About Us", "Privacy Policy", "Terms"];
+  const companyLinks = [
+    { name: "About Us", path: "/about" },
+    { name: "Privacy Policy", path: "#" },
+    { name: "Terms", path: "#" }
+  ];
 
   const socialIcons = [
     { icon: <FaFacebookF />, link: "#" },
@@ -82,7 +86,9 @@ const Footer = () => {
           <ul className="space-y-2 text-gray-300">
             {companyLinks.map((link, idx) => (
               <li key={idx} className="hover:text-white cursor-pointer">
-                {link}
+                <Link to={link.path} className="hover:text-white">
+                  {link.name}
+                </Link>
               </li>
             ))}
           </ul>
