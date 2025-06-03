@@ -44,7 +44,7 @@ const AdminOrderDetails = () => {
     setUpdating(orderId);
     try {
       const res = await fetch(
-        `${{backendDomain}}/api/update-order-status/${orderId}`,
+        `https://apnacare-backend.onrender.com/api/update-order-status/${orderId}`,
         {
           method: "PUT",
           credentials: "include",
